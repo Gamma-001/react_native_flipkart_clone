@@ -1,0 +1,2 @@
+- complete implementing reducers and api
+- create the login and discover pages

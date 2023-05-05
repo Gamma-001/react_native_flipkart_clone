@@ -1,0 +1,1 @@
+export const flipkartLogo = require('./flipkart-logo.png');
