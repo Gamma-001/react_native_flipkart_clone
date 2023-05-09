@@ -3,8 +3,11 @@ import Svg, { G, Path } from 'react-native-svg';
 type SvgProps = {
   fill?: string,
   stroke?: string,
-  viewBox?: string
+  viewBox?: string,
+  strokeWidth?: number
 };
+
+// ---------- main navigation
 
 export function SvgHome(props: SvgProps): JSX.Element {
   return (
@@ -45,7 +48,7 @@ export function SvgNotifications(props: SvgProps) {
 export function SvgAccount(props: SvgProps) {
   return (
     <Svg viewBox = '2 2 20 20' {...props}>
-      <Path fill="none" d="M0 0h24v24H0z" />
+      <Path fill = 'none' d="M0 0h24v24H0z" />
       <Path d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zM6.023 15.416C7.491 17.606 9.695 19 12.16 19c2.464 0 4.669-1.393 6.136-3.584A8.968 8.968 0 0012.16 13a8.968 8.968 0 00-6.137 2.416zM12 11a3 3 0 100-6 3 3 0 000 6z" />
     </Svg>
   );
@@ -66,6 +69,113 @@ export function SvgCart(props: SvgProps) {
       />
     </Svg>
   );
+}
+
+// ---------- account screen navigation
+
+export function SvgOrders(props: SvgProps) {
+  return (
+    <Svg viewBox='2 2 20 20' {...props} fill='none' >
+      <Path
+        d="M20.387 7.157L12 12 3.61 7.15M12 12v9"
+        stroke = { props.stroke || '#000' }
+        strokeWidth = { props.strokeWidth || 2 }
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M11 2.577a2 2 0 012 0l6.66 3.846a2 2 0 011 1.732v7.69a2 2 0 01-1 1.732L13 21.423a2 2 0 01-2 0l-6.66-3.846a2 2 0 01-1-1.732v-7.69a2 2 0 011-1.732L11 2.577zM8.5 4.5L16 9"
+        stroke = { props.stroke || '#000' }
+        strokeWidth = { props.strokeWidth || 2 }
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  )
+}
+
+export function SvgWishlist(props: SvgProps) {
+  return (
+    <Svg viewBox = '2 2 20 20' {...props} fill='none' >
+      <Path
+        d="M12 7.694C10 3 3 3.5 3 9.5s9 11 9 11 9-5 9-11-7-6.5-9-1.806z"
+        stroke = { props.stroke || '#000' }
+        strokeWidth = { props.strokeWidth || 2 }
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  )
+}
+
+export function SvgGift(props: SvgProps) {
+  return (
+    <Svg viewBox='60 60 400 400' {...props} >
+      <Path d="M408 160h-64c15.55-.021 28.483-12.719 28.504-28.269.021-15.55-12.568-28.139-28.118-28.118.023-17.486-15.9-31.228-34.048-27.504C297.124 78.82 288 91.085 288 104.575v5.667c-4.256-3.838-9.831-6.242-16-6.242h-32c-6.169 0-11.744 2.404-16 6.242v-5.667c0-13.491-9.124-25.755-22.339-28.467-18.148-3.724-34.071 10.018-34.048 27.504-15.549-.021-28.138 12.568-28.118 28.118.022 15.551 12.955 28.249 28.505 28.27h-64c-17.673 0-32 14.327-32 32v8c0 17.673 14.327 32 32 32h96v16H96v161.28c0 16.966 13.754 30.72 30.72 30.72H200c8.837 0 16-7.163 16-16V168h80v256c0 8.837 7.163 16 16 16h73.28c16.966 0 30.72-13.754 30.72-30.72V248H312v-16h96c17.673 0 32-14.327 32-32v-8c0-17.673-14.327-32-32-32zm-176-8v-24c0-4.41 3.586-8 8-8h32c4.414 0 8 3.59 8 8v24h-48z" />
+    </Svg>
+  )
+}
+
+export function SvgHeadset(props: SvgProps) {
+  return (
+    <Svg viewBox = '1 1 22 22' {...props} fill = 'none'>
+      <Path
+        d="M20 19h-2a2 2 0 01-2-2v-2a2 2 0 012-2h2m0 6v-6m0 6v0a3 3 0 01-3 3h-6m-7-9v4a2 2 0 002 2v0a2 2 0 002-2v-2a2 2 0 00-2-2H4zm0 0v-3a8 8 0 018-8v0a8 8 0 018 8v3"
+        stroke = { props.stroke || '#000' }
+        strokeWidth = { props.strokeWidth || 2 }
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  )
+}
+
+// ---------- home screen navigation
+
+export function SvgSearch(props: SvgProps) {
+  return (
+    <Svg viewBox='2 2 16 16' {...props} fill='none'>
+      <Path
+        fill = { props.fill || '#000' }
+        fillRule="evenodd"
+        d="M4 9a5 5 0 1110 0A5 5 0 014 9zm5-7a7 7 0 104.2 12.6.999.999 0 00.093.107l3 3a1 1 0 001.414-1.414l-3-3a.999.999 0 00-.107-.093A7 7 0 009 2z"
+      />
+    </Svg>
+  )
+}
+
+export function SvgMicrophone(props: SvgProps) {
+  return (
+    <Svg viewBox = '0 0 32 32' {...props}>
+      <Path 
+        stroke = { props.stroke || '#000' }
+        strokeWidth = { props.strokeWidth || 1 } 
+        d="M15.965 22h.238C18.983 22 21 19.95 21 17.126V5.207C21 2.287 18.892 0 16.202 0h-.237C13.227 0 11 2.336 11 5.207v11.919C11 19.905 13.135 22 15.965 22zM13 5.207C13 3.439 14.33 2 15.965 2h.238C17.798 2 19 3.379 19 5.207v11.919C19 18.844 17.876 20 16.202 20h-.237C14.219 20 13 18.819 13 17.126zM25 11a1 1 0 00-1 1v4.159c0 5.95-2.124 8.842-6.492 8.842h-2.973C8.822 25.001 8 20.193 8 16.16v-4.159a1 1 0 00-2 0v4.159c0 6.89 2.872 10.841 8.535 10.841H15v3h-5a1 1 0 000 2h12a1 1 0 000-2h-5v-3h.508c3.874 0 8.492-1.881 8.492-10.842V12a1 1 0 00-1-1z" />
+    </Svg>
+  )
+}
+
+export function SvgCamera(props: SvgProps) {
+  return (
+    <Svg
+      viewBox = '2 2 20 20' {...props} fill='none'
+    >
+      <Path
+        d="M21 13c0-2.667-.5-5-1-5.333-.32-.214-1.873-.428-4-.553C14.808 7.043 17 5 12 5S9.192 7.043 8 7.114c-2.127.125-3.68.339-4 .553C3.5 8 3 10.333 3 13c0 2.667.5 5 1 5.333.5.334 4 .667 8 .667s7.5-.333 8-.667c.5-.333 1-2.666 1-5.333z"
+        stroke = { props.stroke || '#000' }
+        strokeWidth = { props.strokeWidth || 1.5 }
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M12 16a3 3 0 100-6 3 3 0 000 6z"
+        stroke = { props.stroke || '#000' }
+        strokeWidth = { props.strokeWidth || 1.5 }
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  )
 }
 
 const SVGIcons = {

@@ -1,4 +1,16 @@
 const LANG_EN_US = {
+    ACCOUNT: 'Account',
+    CART: 'Cart',
+    CONFIRMATION: 'Are you sure ?',
+    CONTINUE: 'Continue',
+    COUPONS: 'Coupons',
+    EMAIL: 'Email-ID',
+    ERROR: {
+        server: 'Oops, something went wrong on our side'
+    },
+    HELP_CENTER: 'Help Center',
+    HOME: 'Home',
+    JOIN: 'Join',
     LOGIN: {
         self: 'Log in',
         title: 'Log in for the best experience',
@@ -6,28 +18,29 @@ const LANG_EN_US = {
         descNumber: 'Enter your phone number to continue',
         descEmail: 'Enter your email address to continue'
     },
+    LOGOUT: 'Log Out',
+    NO: 'No',
+    NOTIFICATIONS: 'Notifications',
+    ORDERS: 'Orders',
+    PHONE_NUMBER: 'Phone Number',
+    SEARCH_PRODUCTS: 'Search for products',
+    SHOPS: 'Shops',
     SIGNUP: {
         self: 'Sign Up',
         title: 'Looks like you\'re new here',
         descNumber: 'Enter your phone number to continue',
         descEmail: 'Enter your email address to continue'
     },
-    PHONE_NUMBER: 'Phone Number',
-    EMAIL: 'Email-ID',
-    USE_PHONE: 'Use Phone Number',
-    USE_EMAIl: 'Use Email-ID',
     T_AND_S: [
         'By continuing, you agree to Flipkart\'s',
         'Terms of Use',
         'and',
         'Privacy Policy',
     ],
-    CONTINUE: 'Continue',
-    HOME: 'Home', 
-    SHOPS: 'Shops',
-    NOTIFICATIONS: 'Notifications',
-    ACCOUNT: 'Account',
-    CART: 'Cart'
+    USE_PHONE: 'Use Phone Number',
+    USE_EMAIl: 'Use Email-ID',
+    WISHLIST: 'Wishlist',
+    YES: 'Yes'
 };
 
 export default LANG_EN_US;

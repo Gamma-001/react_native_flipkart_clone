@@ -3,7 +3,7 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider } from 'react-redux';
-import FlipkartScreen from './components/Screens/Flipkart';
+import FlipkartScreen from './navigators/Flipkart/Flipkart';
 
 import store from './store';
 

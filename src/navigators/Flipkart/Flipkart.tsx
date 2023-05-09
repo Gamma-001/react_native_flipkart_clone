@@ -1,16 +1,18 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { 
     View, Text, Image, StatusBar, SafeAreaView, KeyboardAvoidingView, Pressable,
     useWindowDimensions, Platform
 } from 'react-native';
-import LoginScreen from './Login';
-import MainAppScreen from './MainApp';
+import LoginScreen from '../../screens/Login/Login';
+import MainAppScreen from '../MainApp/MainApp';
 
 import { LanguageContext } from '../../contexts';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Colors } from '../../styles/constants';
+import { Colors } from '../../themes/constants';
 import { flipkartLogo } from '../../assets/images/sources';
-import styles from '../../styles/s_Flipkart';
+import styles from './Flipkart.styles';
+import { RootState } from '../../store';
 
 import LANG_EN_US from '../../languages/en-US';
 import { NavigationProp } from '@react-navigation/native';
@@ -19,16 +21,15 @@ const Stack = createStackNavigator();
 const LANG = LANG_EN_US;
 
 export default function FlipkartScreen():JSX.Element {
-    const [loginActive, setLoginActive] = useState(true);
     const wDims = useWindowDimensions();
     const headerHeight = Math.max(20, wDims.height / 35);
+    const credentials = useSelector((state: RootState) => state.credentials);
 
     return (
         <LanguageContext.Provider value = { LANG }>
-        <SafeAreaView style = {{ backgroundColor: loginActive ? 'rgb(20 20 20)' : Colors.BG_primary, flex: 1 }} >
+        <SafeAreaView style = {{ flex: 1, backgroundColor: credentials.sessionID ? Colors.BG_primary : 'rgb(20 20 20)' }} >
             <StatusBar 
-                barStyle = 'light-content' 
-                backgroundColor = { loginActive ? 'rgb(20 20 20)' : Colors.BG_primary }
+                barStyle = 'light-content' backgroundColor = { credentials.sessionID ? Colors.BG_primary : 'rgb(20 20 20)' }
             />
             <KeyboardAvoidingView 
                 style = {{ flex: 1 }} keyboardVerticalOffset = { Platform.OS == 'ios' ? 0 : headerHeight }
@@ -37,8 +38,8 @@ export default function FlipkartScreen():JSX.Element {
 
                 <Stack.Navigator initialRouteName = 'login'>
                     <Stack.Screen name = 'login' component = { LoginScreen } options = {{
-                        header: ({ navigation }) => <LoginHeader {...{ navigation }} />,
-                        headerMode: 'screen'
+                        header: ({ navigation }) => <LoginHeader navigation = { navigation } />,
+                        headerMode: 'screen',
                     }}/>
                     <Stack.Screen 
                         name = 'mainApp' component = { MainAppScreen } options = {{
@@ -64,7 +65,10 @@ function LoginHeader({ navigation }: HeaderProps):JSX.Element {
     return (
         <View style = {{ backgroundColor: Colors.BG_primary }} >
             <View style = { styles.loginHeaderContainer }>
-                <Pressable style = { styles.btnClose } onPress = {() => { navigation.navigate('mainApp') }}>
+                <Pressable 
+                    style = { styles.btnClose } 
+                    onPress = {() => { navigation.navigate('mainApp'); }}
+                >
                     <Text style = { styles.btnCloseText }>{ String.fromCharCode(parseInt('2715', 16)) }</Text>
                 </Pressable>
 
@@ -75,7 +79,7 @@ function LoginHeader({ navigation }: HeaderProps):JSX.Element {
                             setDims({
                                 width: e.nativeEvent.source.width,
                                 height: e.nativeEvent.source.height
-                            })
+                            });
                         }}
                         style = {[
                             styles.headerImage, 

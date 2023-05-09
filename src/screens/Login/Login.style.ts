@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Colors, Sizes } from './constants';
+import { Colors, Sizes } from '../../themes/constants';
 
 const styles = StyleSheet.create({
     // --------- containers
@@ -41,6 +41,10 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         fontSize: Sizes.text * 0.7
     },
+    termsOuter: {
+        flexDirection: 'row',
+        flexWrap: 'wrap'
+    },
 
     // input
     inputLegend: {
@@ -67,8 +71,8 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.BG_secondary,
         height: 63,
         padding: 10,
-        borderTopWidth: 3,
-        borderTopColor: Colors.FG_secondary
+        borderTopWidth: 2,
+        borderTopColor: 'rgb(150 150 150)'
     },
     btnSubmitInner: {
         height: 40,

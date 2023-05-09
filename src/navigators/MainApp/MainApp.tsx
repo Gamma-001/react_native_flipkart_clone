@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 import { View } from 'react-native';
-import HomeScreen from './MainApp/Home';
-import ShopsScreen from './MainApp/Shops';
-import NotificationsScreen from './MainApp/Notifications';
-import AccountScreen from './MainApp/Account';
-import CartScreen from './MainApp/Cart';
+import HomeScreen from '../../screens/MainApp/Home/Home';
+import ShopsScreen from '../../screens/MainApp/Shops/Shops';
+import NotificationsScreen from '../../screens/MainApp/Notifications/Notifications';
+import AccountScreen from '../../screens/MainApp/Account/Account';
+import CartScreen from '../../screens/MainApp/Cart/Cart';
 
 import { LanguageContext } from '../../contexts';
 

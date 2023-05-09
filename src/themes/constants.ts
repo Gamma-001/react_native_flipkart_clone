@@ -6,8 +6,10 @@ export const Colors = {
     BG_BTN_primary: 'rgb(255 110 3)',
     BG_BTN_secondary: 'rgb(50 90 210)',
     BG_BTN_inactive: 'rgb(200 200 200)',
+    BG_BTN_CLEAR_HIGHLIGHT: 'rgb(230 230 240)',
 
-    COLOR_BORDER_TERTIARY: 'rgb(230 230 230)',
+    COLOR_BORDER_TERTIARY: 'rgb(180 180 180)',
+    COLOR_SHADOW: 'rgb(220, 220, 220)',
 
     FG_primary: 'rgb(255 255 255)',
     FG_secondary: 'rgb(20 20 20)',
@@ -16,4 +18,5 @@ export const Colors = {
 
 export const Sizes = {
     text: 14,
+    borderRadius: 3
 }

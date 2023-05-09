@@ -1,8 +1,8 @@
 import { View } from 'react-native';
 
-import { Colors } from '../../../styles/constants';
+import { Colors } from '../../../themes/constants';
 
-export default function CartScreen():JSX.Element {
+export default function ShopsScreen() {
     return (
         <View style = {{ flex: 1, backgroundColor: Colors.BG_secondary }}>
             
