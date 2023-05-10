@@ -1,6 +1,16 @@
 const LANG_EN_US = {
     ACCOUNT: 'Account',
     CART: 'Cart',
+    CATEGORIES: {
+        'appliances': 'Appliances',
+        'electronics': 'Electronics',
+        'fashion': 'Fashion',
+        'furnitures': 'Furnitures',
+        'kitchen': 'Kitchen',
+        'medicine': 'Medicine',
+        'skincare': 'Skincare',
+        'mobiles': 'Mobiles'
+    } as { [key:string]: string },
     CONFIRMATION: 'Are you sure ?',
     CONTINUE: 'Continue',
     COUPONS: 'Coupons',
@@ -23,6 +33,7 @@ const LANG_EN_US = {
     NOTIFICATIONS: 'Notifications',
     ORDERS: 'Orders',
     PHONE_NUMBER: 'Phone Number',
+    SEARCH_PLACEHOLDER: 'shirts for men',
     SEARCH_PRODUCTS: 'Search for products',
     SHOPS: 'Shops',
     SIGNUP: {

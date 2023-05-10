@@ -1,27 +1,52 @@
 import { useState, useContext } from 'react';
-import { View, Image, Text, Pressable, Dimensions, ImageSourcePropType } from 'react-native';
-import { SvgSearch, SvgMicrophone, SvgCamera } from '../../../assets/icons/svg';
+import { View, Image, Text, Pressable, Dimensions, ImageSourcePropType, Alert } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import ProductsScreen from '../Products/Products';
+import { SvgSearch, SvgMicrophone, SvgCamera } from '../../../../assets/icons/svg';
 
-import { LanguageContext } from '../../../contexts';
-import { flipkartLogo2, placeholders } from '../../../assets/images/sources';
-import styles from './Home.styles';
-import commonStyles from '../../../themes/commons';
-import { Colors } from '../../../themes/constants';
+import { LanguageContext } from '../../../../contexts';
+import { flipkartLogo2, placeholders } from '../../../../assets/images/sources';
+import styles from './Explore.styles';
+import commonStyles from '../../../../themes/commons';
+import { Colors } from '../../../../themes/constants';
+import { BasicScreenProps } from '../../../../@types/commons';
+
+const Stack = createStackNavigator();
 
 export default function HomeScreen(): JSX.Element {
+    return (
+        <Stack.Navigator initialRouteName = 'explore' screenOptions = {{
+            headerShown: false,
+        }}>
+            <Stack.Screen name = 'explore' component = { Home }/>
+            <Stack.Screen name = 'products' component = { ProductsScreen }/>
+        </Stack.Navigator>
+    );
+}
+
+function Home({ navigation } : BasicScreenProps): JSX.Element {
     const LANG = useContext(LanguageContext);
 
     return (
         <View style = { styles.homeContainer }>
             {/* Header */}
-            
+
             <View style = { styles.headerContainer }>
                 <HeaderLogo />
                 <View style = { styles.searchOuter }>
                     <View style = { styles.brandMall }>
                         <Text style = { styles.brandMallText }>Brand Mall</Text>
                     </View>
-                    <Pressable style = { styles.searchContainer }>
+                    <Pressable 
+                        style = { styles.searchContainer }
+                        onPress = {() => {
+                            // navigation?.navigate('mainApp', {
+                            //     screen: 'home', params: {
+                            //         screen: 'products'
+                            //     }
+                            // });
+                        }}
+                    >
                         <View style = { styles.searchIcon }>
                             <SvgSearch fill = { Colors.FG_tertiary }/>
                         </View>
@@ -41,7 +66,11 @@ export default function HomeScreen(): JSX.Element {
             <View style = { styles.categoryContainer }>
                 {
                     placeholders.map((x, index) => (
-                        <Category key = { index } source = { x.source } name = { x.name }/>
+                        <Category 
+                            key = { index } source = { x.source } 
+                            name = { LANG.CATEGORIES[x.name] } tag = { x.name }
+                            navigation = { navigation }
+                        />
                     ))
                 }
             </View>
@@ -61,16 +90,28 @@ function HeaderLogo(): JSX.Element {
     );
 };
 
-type CategoryProp = {
+type CategoryProp = BasicScreenProps & {
     source: ImageSourcePropType,
-    name: string
+    name: string,
+    tag: string
 };
-function Category({ source, name }: CategoryProp): JSX.Element {
+function Category({ source, name, tag, navigation }: CategoryProp): JSX.Element {
     const [image, setImage] = useState(Image.resolveAssetSource(source))
     const imageWidth = (Dimensions.get('window').width - (styles.categoryContainer.padding || 0) * 2) / 4 - 2 * (styles.category.padding || 0);
 
     return (
-        <Pressable style = { styles.category }>
+        <Pressable 
+            style = { styles.category }
+            onPress = {() => {
+                navigation?.navigate('mainApp', {
+                    screen: 'home', params: {
+                        screen: 'products', params: {
+                            tags: [ tag ]
+                        }
+                    }
+                })
+            }}
+        >
             <View style = { styles.categoryImage }>
                 <Image 
                     style = {{ width: imageWidth, height: imageWidth * image.height / image.width }}

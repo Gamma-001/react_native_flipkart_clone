@@ -9,11 +9,15 @@ export const Colors = {
     BG_BTN_CLEAR_HIGHLIGHT: 'rgb(230 230 240)',
 
     COLOR_BORDER_TERTIARY: 'rgb(180 180 180)',
-    COLOR_SHADOW: 'rgb(220, 220, 220)',
+    COLOR_SHADOW: 'rgb(220 220 220)',
+
+    HIGHLIGHT_PRIMARY: 'rgb(100 180 120)',
+    HIGHLIGHT_SECONDARY: 'rgb(200 200 215)',
 
     FG_primary: 'rgb(255 255 255)',
     FG_secondary: 'rgb(20 20 20)',
-    FG_tertiary: 'rgb(60 60 60)',
+    FG_tertiary: 'rgb(80 80 80)',
+    FG_tertiary_highlight: 'rgb(180 180 180)'
 };
 
 export const Sizes = {

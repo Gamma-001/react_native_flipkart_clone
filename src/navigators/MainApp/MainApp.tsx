@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { View } from 'react-native';
-import HomeScreen from '../../screens/MainApp/Home/Home';
+import HomeScreen from '../../screens/MainApp/Home/Explore/Explore';
 import ShopsScreen from '../../screens/MainApp/Shops/Shops';
 import NotificationsScreen from '../../screens/MainApp/Notifications/Notifications';
 import AccountScreen from '../../screens/MainApp/Account/Account';
@@ -19,7 +19,7 @@ export default function MainAppScreen():JSX.Element {
 
     return (
         <View style = {{ flex: 1 }}>
-            <BottomTab.Navigator screenOptions = {{
+            <BottomTab.Navigator initialRouteName = 'home' screenOptions = {{
                 headerShown: false,
                 tabBarStyle: { padding: 5 }
             }}>
@@ -77,7 +77,7 @@ type IconProps = {
 }
 function HomeIcon(props: IconProps): JSX.Element {
     return (
-        <View style = {{ height: props.size, width: props.size }}>
+        <View style = { TabIconStyle(props) }>
             <SVGIcons.SvgHome fill = { props.color } />
         </View>
     )
@@ -85,7 +85,7 @@ function HomeIcon(props: IconProps): JSX.Element {
 
 function ShopsIcon(props: IconProps): JSX.Element {
     return (
-        <View style = {{ height: props.size, width: props.size }}>
+        <View style = { TabIconStyle(props) }>
             <SVGIcons.SvgShops fill = { props.color }/>
         </View>
     )
@@ -93,7 +93,7 @@ function ShopsIcon(props: IconProps): JSX.Element {
 
 function NotificationsIcon(props: IconProps): JSX.Element {
     return (
-        <View style = {{ height: props.size, width: props.size }}>
+        <View style = { TabIconStyle(props) }>
             <SVGIcons.SvgNotifications fill = { props.color }/>
         </View>
     )
@@ -101,7 +101,7 @@ function NotificationsIcon(props: IconProps): JSX.Element {
 
 function AccountIcon(props: IconProps): JSX.Element {
     return (
-        <View style = {{ height: props.size, width: props.size }}>
+        <View style = { TabIconStyle(props) }>
             <SVGIcons.SvgAccount fill = { props.color }/>
         </View>
     )
@@ -109,8 +109,12 @@ function AccountIcon(props: IconProps): JSX.Element {
 
 function CartIcon(props: IconProps): JSX.Element {
     return (
-        <View style = {{ height: props.size, width: props.size }}>
+        <View style = { TabIconStyle(props) }>
             <SVGIcons.SvgCart fill = { props.color }/>
         </View>
     )
+}
+
+function TabIconStyle(props: any) {
+    return { height: props.size, width: props.size, padding: 2 }
 }

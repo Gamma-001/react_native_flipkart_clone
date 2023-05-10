@@ -1,9 +1,19 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { config } from '../../config';
+
+interface fetchProductArgs {
+    tags: string[],
+    offset?: number,
+    limit?: number,
+    sort?: string[],
+    sortOrder?: string[]
+};
 
 export const flipkartApi = createApi({
     reducerPath: 'flipkartApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://192.180.0.211:3001/' }),
+    baseQuery: fetchBaseQuery({ baseUrl: config.baseAddress }),
     endpoints: (builder) => ({
+        // mutations
         login: builder.mutation({
             query: (arg: { phone?: string, email?: string }) => ({
                 url: 'auth/login',
@@ -24,8 +34,25 @@ export const flipkartApi = createApi({
                 method: 'POST',
                 body: { sessionID: arg.sessionID }
             })
+        }),
+
+        // queries
+        fetchProducts: builder.query({
+            query: (arg: fetchProductArgs) => {
+                if (!arg.limit && !arg.offset && !arg.sort) return `products?tags=${arg.tags.join('+')}`;
+                else {
+                    let url = `products?tags=${arg.tags.join('+')}&offset=${arg.offset || 0}&limit=${arg.limit || 10}`;
+                    if (arg.sort) url += '&sort=' + arg.sort.join('+');
+                    if (arg.sortOrder) url += '&sortOrder=' + arg.sortOrder.join('+');
+
+                    return url;
+                }
+            }
         })
     })
 });
 
-export const { useLoginMutation, useSignupMutation, useLogoutMutation } = flipkartApi;
+export const { 
+    useLoginMutation, useSignupMutation, useLogoutMutation,
+    useFetchProductsQuery
+} = flipkartApi;
