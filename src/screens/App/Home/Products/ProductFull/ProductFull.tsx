@@ -1,73 +1,20 @@
-import { useState, useContext } from 'react';
-import { View, TextInput, Pressable, FlatList, Text, Dimensions } from 'react-native';
+import { useState } from 'react';
+import { 
+    View, 
+    Text, 
+    
+    Dimensions 
+} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import { SvgSearch, SvgMicrophone, SvgCamera, SvgHalfStar, SvgFullStar } from '../../../../assets/icons/svg';
-import { useFetchProductsQuery } from '../../../../features/services/api';
+import { SvgHalfStar, SvgFullStar } from '../../../../../assets/icons/svg';
 
-import { LanguageContext } from '../../../../contexts';
-import styles from './Product.styles';
-import { Colors } from '../../../../themes/constants';
+import styles from './ProductFull.style';
+import { Colors } from '../../../../../themes/constants';
 
-import { config } from '../../../../config';
-import { formatCurrency } from '../../../../utils';
-import { BasicScreenProps } from '../../../../@types/commons';
+import { config } from '../../../../../config';
+import { formatCurrency } from '../../../../../utils';
 
-export default function ProductsScreen({ navigation, route }: BasicScreenProps): JSX.Element {
-    const products = useFetchProductsQuery({
-        tags: route?.params?.tags || [],
-        limit: route?.params?.limit || 10,
-    });
-
-    return (
-        <View style = { styles.productsContainer }>
-            <SearchBar navigation = { navigation }/>
-            <ProductList products = { products.data || []}/>
-        </View>
-    );
-}
-
-function SearchBar({ navigation }: BasicScreenProps): JSX.Element {
-    const [query, setQuery] = useState('');
-    const LANG = useContext(LanguageContext)
-
-    return (
-        <View style = { styles.searchContainer }>
-            <Pressable 
-                style = { styles.searchIcons }
-                onPress = {() => {
-                    navigation?.goBack()
-                }}
-            >
-                <SvgSearch fill = { Colors.FG_tertiary } />
-            </Pressable>
-            <TextInput 
-                style = { styles.textInput } placeholderTextColor = { Colors.FG_tertiary_highlight }
-                value = { query } placeholder = { LANG.SEARCH_PLACEHOLDER }
-                onChangeText = { setQuery }
-            />
-            <View style = { styles.searchIcons }>
-                <SvgMicrophone fill = { Colors.FG_tertiary } />
-            </View>
-            <View style = { styles.searchIcons }>
-                <SvgCamera fill = { Colors.FG_tertiary } />
-            </View>
-        </View>
-    )
-}
-
-function ProductList({ products }: any): JSX.Element {
-
-    return (
-        <FlatList
-            data = { products }
-            renderItem = {({ item }) => <ProductFull data = { item }/>}
-            keyExtractor = {item => item._id}
-            bounces = { false }
-        />
-    );
-}
-
-function ProductFull({ data }: any): JSX.Element {
+export default function ProductFull({ data }: any): JSX.Element {
     const windowWidth = Dimensions.get('window').width - (styles.productFullContainer.padding || 0) * 2;
     const imageWidth = windowWidth / 3;
     const [dims, setDims] = useState({
@@ -79,7 +26,7 @@ function ProductFull({ data }: any): JSX.Element {
             <FastImage
                 style = {{ height: imageWidth * (dims.width ? (dims.height / dims.width) : 0), width: imageWidth }} 
                 source = {{
-                    uri: `${config.baseAddress}images/${data.imageURL}`,
+                    uri: `${config.baseAddress}images/${data.imageURL[0]}`,
                     priority: FastImage.priority.normal
                 }}
                 onLoad = {(e) => setDims(e.nativeEvent)}
@@ -123,7 +70,7 @@ function ProductFull({ data }: any): JSX.Element {
                                     Math.round(100 * (1 - parseInt(data.price.discount) / data.price.base))
                                 }%</Text>
                                 <Text style = { styles.productFullBasePriceText }>{ formatCurrency(parseInt(data.price.base)) }</Text>
-                                <Text style = { styles.productFullPriceText }>{ formatCurrency(parseInt(data.price.base)) }</Text>
+                                <Text style = { styles.productFullPriceText }>{ formatCurrency(parseInt(data.price.discount)) }</Text>
                             </>
                         ) : (
                             <Text style = { styles.productFullPriceText }>{ formatCurrency(parseInt(data.price.base)) }</Text>
@@ -134,14 +81,3 @@ function ProductFull({ data }: any): JSX.Element {
         </View>
     )
 }
-
-// function ProductsSplit({ data }: any): JSX.Element {
-//     const windowWidth = Dimensions.get('window').width - (styles.productFullContainer.padding || 0) * 2;
-//     const imageWidth = windowWidth / 3;
-//     const [dims, setDims] = useState({
-//         height: 0, width: 0
-//     });
-
-// }
-
-// TODO: Add the other container

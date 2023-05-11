@@ -14,6 +14,8 @@ export const Colors = {
     HIGHLIGHT_PRIMARY: 'rgb(100 180 120)',
     HIGHLIGHT_SECONDARY: 'rgb(200 200 215)',
 
+    MODAL_BACKDROP: 'rgba(0 0 0 / 0.6)',
+
     FG_primary: 'rgb(255 255 255)',
     FG_secondary: 'rgb(20 20 20)',
     FG_tertiary: 'rgb(80 80 80)',
@@ -22,5 +24,6 @@ export const Colors = {
 
 export const Sizes = {
     text: 14,
-    borderRadius: 3
+    padding: 10,
+    borderRadius: 3,
 }

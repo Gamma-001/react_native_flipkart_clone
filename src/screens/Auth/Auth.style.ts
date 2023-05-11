@@ -65,23 +65,6 @@ const styles = StyleSheet.create({
         paddingLeft: 10, paddingRight: 10,
         fontSize: Sizes.text * 0.9
     },
-
-    // Buttons
-    btnSubmitOuter: {
-        backgroundColor: Colors.BG_secondary,
-        height: 63,
-        padding: 10,
-        borderTopWidth: 2,
-        borderTopColor: 'rgb(150 150 150)'
-    },
-    btnSubmitInner: {
-        height: 40,
-        justifyContent: 'center'
-    },
-    btnSubmitText: {
-        color: Colors.FG_primary,
-        textAlign: 'center'
-    }
 });
 
 export default styles;

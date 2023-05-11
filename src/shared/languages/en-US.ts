@@ -42,6 +42,7 @@ const LANG_EN_US = {
         descNumber: 'Enter your phone number to continue',
         descEmail: 'Enter your email address to continue'
     },
+    SORT_BY: 'Sort By',
     T_AND_S: [
         'By continuing, you agree to Flipkart\'s',
         'Terms of Use',

@@ -64,21 +64,6 @@ const styles = StyleSheet.create({
     searchCamera: {
         flex: 0.12,
         paddingLeft: 4, paddingRight: 4
-    },
-    category: {
-        padding: 5,
-    },
-    categoryImage: {
-        borderRadius: Sizes.borderRadius * 2,
-        overflow: 'hidden'
-    },
-    categoryTextOuter: {
-        alignSelf: 'center',
-        padding: 5,
-    },
-    categoryText: {
-        fontSize: Sizes.text * 0.8,
-        fontWeight: 'bold',
     }
 });
 

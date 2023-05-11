@@ -5,6 +5,7 @@ import { FButtonBGHighlight } from '../../../components/FButton/Fbutton';
 import { SvgOrders, SvgWishlist, SvgGift, SvgHeadset } from '../../../assets/icons/svg';
 import { useLogoutMutation } from '../../../features/services/api';
 
+import { NAVIGATOR } from '../../../shared/constants';
 import { LanguageContext } from '../../../contexts';
 import { NavigationProp } from '@react-navigation/native';
 import { resetCredentials } from '../../../features/credentials/credentialsSlice';
@@ -31,7 +32,7 @@ export default function AccountScreen({ navigation }: AccountScreenProps):JSX.El
             dispatch(resetCredentials());
             navigation.reset({
                 index: 0,
-                routes: [{ name: 'login' }]
+                routes: [{ name: NAVIGATOR.AUTH }]
             });
             logoutStatus.reset();
         }
@@ -126,7 +127,7 @@ export default function AccountScreen({ navigation }: AccountScreenProps):JSX.El
                                 onPress = {() => {
                                     navigation.reset({
                                         index: 0,
-                                        routes: [{ name: 'login' }]
+                                        routes: [{ name: NAVIGATOR.AUTH }]
                                     })
                                 }}
                             >

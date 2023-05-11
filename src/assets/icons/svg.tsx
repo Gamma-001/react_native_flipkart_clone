@@ -91,7 +91,7 @@ export function SvgOrders(props: SvgProps) {
         strokeLinejoin="round"
       />
     </Svg>
-  )
+  );
 }
 
 export function SvgWishlist(props: SvgProps) {
@@ -105,7 +105,7 @@ export function SvgWishlist(props: SvgProps) {
         strokeLinejoin="round"
       />
     </Svg>
-  )
+  );
 }
 
 export function SvgGift(props: SvgProps) {
@@ -113,7 +113,7 @@ export function SvgGift(props: SvgProps) {
     <Svg viewBox='60 60 400 400' {...props} >
       <Path d="M408 160h-64c15.55-.021 28.483-12.719 28.504-28.269.021-15.55-12.568-28.139-28.118-28.118.023-17.486-15.9-31.228-34.048-27.504C297.124 78.82 288 91.085 288 104.575v5.667c-4.256-3.838-9.831-6.242-16-6.242h-32c-6.169 0-11.744 2.404-16 6.242v-5.667c0-13.491-9.124-25.755-22.339-28.467-18.148-3.724-34.071 10.018-34.048 27.504-15.549-.021-28.138 12.568-28.118 28.118.022 15.551 12.955 28.249 28.505 28.27h-64c-17.673 0-32 14.327-32 32v8c0 17.673 14.327 32 32 32h96v16H96v161.28c0 16.966 13.754 30.72 30.72 30.72H200c8.837 0 16-7.163 16-16V168h80v256c0 8.837 7.163 16 16 16h73.28c16.966 0 30.72-13.754 30.72-30.72V248H312v-16h96c17.673 0 32-14.327 32-32v-8c0-17.673-14.327-32-32-32zm-176-8v-24c0-4.41 3.586-8 8-8h32c4.414 0 8 3.59 8 8v24h-48z" />
     </Svg>
-  )
+  );
 }
 
 export function SvgHeadset(props: SvgProps) {
@@ -127,7 +127,7 @@ export function SvgHeadset(props: SvgProps) {
         strokeLinejoin="round"
       />
     </Svg>
-  )
+  );
 }
 
 // ---------- home screen navigation
@@ -141,7 +141,7 @@ export function SvgSearch(props: SvgProps) {
         d="M4 9a5 5 0 1110 0A5 5 0 014 9zm5-7a7 7 0 104.2 12.6.999.999 0 00.093.107l3 3a1 1 0 001.414-1.414l-3-3a.999.999 0 00-.107-.093A7 7 0 009 2z"
       />
     </Svg>
-  )
+  );
 }
 
 export function SvgMicrophone(props: SvgProps) {
@@ -177,7 +177,7 @@ export function SvgCamera(props: SvgProps) {
         strokeLinejoin="round"
       />
     </Svg>
-  )
+  );
 }
 
 // others
@@ -194,7 +194,7 @@ export function SvgFullStar(props: SvgProps) {
         fillRule="evenodd"
       />
     </Svg>
-  )
+  );
 }
 
 export function SvgHalfStar(props: SvgProps & { fill2?: string }) {
@@ -219,7 +219,22 @@ export function SvgHalfStar(props: SvgProps & { fill2?: string }) {
         />
       </Svg>
     </>
-  )
+  );
+}
+
+export function SvgExpandDown(props: SvgProps) {
+  return (
+    <Svg viewBox='0 -4.5 20 20' {...props}>
+      <Path
+        d="M164.292 6524.366c-.39.405-.39 1.06 0 1.464l8.264 8.563c.78.81 2.047.81 2.827 0l8.325-8.625c.385-.4.39-1.048.01-1.454a.976.976 0 00-1.425-.011l-7.617 7.893a.975.975 0 01-1.414 0l-7.557-7.83a.974.974 0 00-1.413 0"
+        transform="translate(-220 -6684) translate(56 160)"
+        fill = { props.fill || '#000' }
+        stroke = { props.stroke || 'none' }
+        strokeWidth = { props.stroke || 1 }
+        fillRule="evenodd"
+      />
+    </Svg>
+  );
 }
 
 const SVGIcons = {

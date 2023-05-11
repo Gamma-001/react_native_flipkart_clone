@@ -1,23 +1,24 @@
 import { useContext, useEffect, useState } from 'react';
-import { View, Text, TextInput, Pressable, Alert } from 'react-native';
 import { useDispatch } from 'react-redux';
+import { View, Text, TextInput, Pressable, Alert } from 'react-native';
+import SubmitButton from './SubmitButton/SubmitButton';
 
 import { LanguageContext } from '../../contexts';
 import { useLoginMutation, useSignupMutation } from '../../features/services/api';
 import { setCredentials } from '../../features/credentials/credentialsSlice';
 
-import styles from './Login.style';
+import { NAVIGATOR } from '../../shared/constants'; 
+import styles from './Auth.style';
 import commonStyles from '../../themes/commons';
-import { Colors } from '../../themes/constants';
 
-import { NavigationProp } from '@react-navigation/native';
+import { CommonActions, NavigationProp } from '@react-navigation/native';
 
 const LOGIN_OPTS = {
     PHONE: 0,
     EMAIL: 1
 };
 
-export default function LoginScreen({ navigation }: { navigation: NavigationProp<any> }): JSX.Element {
+export default function AuthScreen({ navigation }: { navigation: NavigationProp<any> }): JSX.Element {
     const LANG = useContext(LanguageContext);
     const dispatch = useDispatch();
 
@@ -49,7 +50,15 @@ export default function LoginScreen({ navigation }: { navigation: NavigationProp
                 ...getDerivedInputObject(inputValue, type),
                 sessionID: loginStatus.data.sessionID
             }));
-            navigation.navigate('mainApp', { screen: 'account' })
+            const resetActions = CommonActions.reset({
+                index: 0,
+                routes: [
+                    {name: NAVIGATOR.APP, params: {
+                        screen: NAVIGATOR.ACCOUNT
+                    }}
+                ]
+            })
+            navigation.dispatch(resetActions);
         }
     }, [loginStatus]);
 
@@ -94,13 +103,12 @@ export default function LoginScreen({ navigation }: { navigation: NavigationProp
         if (type == LOGIN_OPTS.PHONE) {
             setType(LOGIN_OPTS.EMAIL);
             setInputValue('');
-            setDisabled(true);
         }
         else {
             setType(LOGIN_OPTS.PHONE);
             setInputValue('+91 ');
-            setDisabled(true);
         }
+        setDisabled(true);
     };
 
     return (
@@ -142,39 +150,15 @@ export default function LoginScreen({ navigation }: { navigation: NavigationProp
         </View>
 
         {/* footer */}
-        <View style = { styles.btnSubmitOuter }>
-            <LoginButton disabled = { disabled } login = {() => {
-                if (loginStatus.isLoading || signupStatus.isLoading) return;
+        <SubmitButton disabled = { disabled } login = {() => {
+            if (loginStatus.isLoading || signupStatus.isLoading) return;
 
-                const arg = getDerivedInputObject(inputValue, type);
-                isLogin ? login(arg) : signup(arg);
-            }} />
-        </View>
+            const arg = getDerivedInputObject(inputValue, type);
+            isLogin ? login(arg) : signup(arg);
+        }} />
         </>
     );
 };
-
-function LoginButton(props: { disabled: boolean, login: Function }):JSX.Element {
-    const LANG = useContext(LanguageContext);
-    const [opacity, setOpacity] = useState(1);
-
-    return (
-        <Pressable 
-            style = {[ 
-                styles.btnSubmitInner, 
-                { opacity: opacity, backgroundColor: !props.disabled ? Colors.BG_BTN_primary :Colors.BG_BTN_inactive } 
-            ]}
-            disabled = { props.disabled }
-            onPressIn = {() => setOpacity(0.75)}
-            onPressOut = {() => {
-                setOpacity(1);
-                props.login();
-            }}
-        >
-            <Text style = { styles.btnSubmitText }>{ LANG.CONTINUE }</Text>
-        </Pressable>
-    );
-}
 
 // helper functions
 

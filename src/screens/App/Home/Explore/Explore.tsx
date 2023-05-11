@@ -1,30 +1,16 @@
 import { useState, useContext } from 'react';
-import { View, Image, Text, Pressable, Dimensions, ImageSourcePropType, Alert } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
-import ProductsScreen from '../Products/Products';
+import { View, Image, Text, Pressable, Dimensions } from 'react-native';
 import { SvgSearch, SvgMicrophone, SvgCamera } from '../../../../assets/icons/svg';
+import Category from './Category/Category';
 
+import { NAVIGATOR } from '../../../../shared/constants';
 import { LanguageContext } from '../../../../contexts';
 import { flipkartLogo2, placeholders } from '../../../../assets/images/sources';
-import styles from './Explore.styles';
-import commonStyles from '../../../../themes/commons';
+import styles from './Explore.style';
 import { Colors } from '../../../../themes/constants';
 import { BasicScreenProps } from '../../../../@types/commons';
 
-const Stack = createStackNavigator();
-
-export default function HomeScreen(): JSX.Element {
-    return (
-        <Stack.Navigator initialRouteName = 'explore' screenOptions = {{
-            headerShown: false,
-        }}>
-            <Stack.Screen name = 'explore' component = { Home }/>
-            <Stack.Screen name = 'products' component = { ProductsScreen }/>
-        </Stack.Navigator>
-    );
-}
-
-function Home({ navigation } : BasicScreenProps): JSX.Element {
+export default function ExploreScreen({ navigation } : BasicScreenProps): JSX.Element {
     const LANG = useContext(LanguageContext);
 
     return (
@@ -40,11 +26,11 @@ function Home({ navigation } : BasicScreenProps): JSX.Element {
                     <Pressable 
                         style = { styles.searchContainer }
                         onPress = {() => {
-                            // navigation?.navigate('mainApp', {
-                            //     screen: 'home', params: {
-                            //         screen: 'products'
-                            //     }
-                            // });
+                            navigation?.navigate(NAVIGATOR.APP, {
+                                screen: NAVIGATOR.HOME, params: {
+                                    screen: NAVIGATOR.PRODUCTS
+                                }
+                            });
                         }}
                     >
                         <View style = { styles.searchIcon }>
@@ -89,38 +75,3 @@ function HeaderLogo(): JSX.Element {
         />
     );
 };
-
-type CategoryProp = BasicScreenProps & {
-    source: ImageSourcePropType,
-    name: string,
-    tag: string
-};
-function Category({ source, name, tag, navigation }: CategoryProp): JSX.Element {
-    const [image, setImage] = useState(Image.resolveAssetSource(source))
-    const imageWidth = (Dimensions.get('window').width - (styles.categoryContainer.padding || 0) * 2) / 4 - 2 * (styles.category.padding || 0);
-
-    return (
-        <Pressable 
-            style = { styles.category }
-            onPress = {() => {
-                navigation?.navigate('mainApp', {
-                    screen: 'home', params: {
-                        screen: 'products', params: {
-                            tags: [ tag ]
-                        }
-                    }
-                })
-            }}
-        >
-            <View style = { styles.categoryImage }>
-                <Image 
-                    style = {{ width: imageWidth, height: imageWidth * image.height / image.width }}
-                    source = { source }
-                />
-            </View>
-            <View style = { styles.categoryTextOuter }>
-                <Text style = {[ styles.categoryText, { maxWidth: imageWidth - (styles.category.padding || 0) * 2 } ]}>{ name }</Text>
-            </View>
-        </Pressable>
-    );
-}

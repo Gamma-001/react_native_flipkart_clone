@@ -1,20 +1,19 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { View } from 'react-native';
-import HomeScreen from '../../screens/MainApp/Home/Explore/Explore';
-import ShopsScreen from '../../screens/MainApp/Shops/Shops';
-import NotificationsScreen from '../../screens/MainApp/Notifications/Notifications';
-import AccountScreen from '../../screens/MainApp/Account/Account';
-import CartScreen from '../../screens/MainApp/Cart/Cart';
+import HomeNavigator from '../HomeNavigator/HomeNavigator';
+import ShopsScreen from '../../screens/App/Shops/Shops';
+import NotificationsScreen from '../../screens/App/Notifications/Notifications';
+import AccountScreen from '../../screens/App/Account/Account';
+import CartScreen from '../../screens/App/Cart/Cart';
 
-import { LanguageContext } from '../../contexts';
-
-import SVGIcons from '../../assets/icons/svg';
-
+import { NAVIGATOR } from '../../shared/constants';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { LanguageContext } from '../../contexts';
+import SVGIcons from '../../assets/icons/svg';
 
 const BottomTab = createBottomTabNavigator();
 
-export default function MainAppScreen():JSX.Element {
+export default function AppNavigator():JSX.Element {
     const LANG = useContext(LanguageContext);
 
     return (
@@ -24,7 +23,7 @@ export default function MainAppScreen():JSX.Element {
                 tabBarStyle: { padding: 5 }
             }}>
                 <BottomTab.Screen 
-                    name = 'home' component = { HomeScreen } 
+                    name = { NAVIGATOR.HOME } component = { HomeNavigator } 
                     options = {{ 
                         tabBarIcon: (props) => <HomeIcon {...props} />,
                         title: LANG.HOME,
@@ -32,7 +31,7 @@ export default function MainAppScreen():JSX.Element {
                     }}
                 />
                 <BottomTab.Screen 
-                    name = 'shops' component = { ShopsScreen }
+                    name = { NAVIGATOR.SHOPS } component = { ShopsScreen }
                     options = {{ 
                         tabBarIcon: (props) => <ShopsIcon {...props} />,
                         title: LANG.SHOPS,
@@ -40,7 +39,7 @@ export default function MainAppScreen():JSX.Element {
                     }}
                 />
                 <BottomTab.Screen
-                    name = 'notifications' component = { NotificationsScreen }
+                    name = { NAVIGATOR.NOTIFICATIONS } component = { NotificationsScreen }
                     options = {{
                         tabBarIcon: (props) => <NotificationsIcon {...props} />,
                         title: LANG.NOTIFICATIONS,
@@ -48,7 +47,7 @@ export default function MainAppScreen():JSX.Element {
                     }}
                 />
                 <BottomTab.Screen
-                    name = 'account' component = { AccountScreen }
+                    name = { NAVIGATOR.ACCOUNT } component = { AccountScreen }
                     options = {{
                         tabBarIcon: (props) => <AccountIcon {...props} />,
                         title: LANG.ACCOUNT,
@@ -56,7 +55,7 @@ export default function MainAppScreen():JSX.Element {
                     }}
                 />
                 <BottomTab.Screen 
-                    name = 'cart' component = { CartScreen }
+                    name = { NAVIGATOR.CART } component = { CartScreen }
                     options = {{
                         tabBarIcon: (props) => <CartIcon {...props} />,
                         title: LANG.CART,

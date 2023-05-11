@@ -1,5 +1,5 @@
 import { StyleSheet, TextStyle } from 'react-native';
-import { Colors, Sizes } from '../../../../themes/constants';
+import { Colors, Sizes } from '../../../../../themes/constants';
 
 const productPriceText = {
     fontSize: Sizes.text * 0.95,
@@ -8,62 +8,57 @@ const productPriceText = {
 } as TextStyle;
 
 const styles = StyleSheet.create({
-    productsContainer: {
-        flex: 1,
-        backgroundColor: Colors.BG_secondary
-    },
-    searchContainer: {
-        flexDirection: 'row',
-        backgroundColor: Colors.BG_tertiary,
-        height: Sizes.text * 3 + 2,
-        borderBottomWidth: 2,
-        borderBottomColor: Colors.COLOR_SHADOW
-    },
+    // ---------- containers
+
     productFullContainer: {
         flexDirection: 'row',
         backgroundColor: Colors.BG_tertiary,
-        padding: 10,
+        padding: Sizes.padding,
         borderBottomColor: Colors.COLOR_SHADOW,
         borderBottomWidth: 2
     },
     productSplitContainer: {
         backgroundColor: Colors.BG_tertiary,
-        padding: 10
+        padding: Sizes.padding,
+        borderWidth: 1,
+        borderColor: Colors.COLOR_SHADOW,
+        borderRadius: 5
     },
 
-    searchIcons: {
-        height: Sizes.text * 3,
-        width: Sizes.text * 3,
-        padding: 10, paddingLeft: 3, paddingRight: 3
-    },
-    textInput: {
-        flex: 1,
-        paddingLeft: 5, paddingRight: 5,
-        color: Colors.FG_tertiary,
-        fontSize: Sizes.text * 0.9
-    },
-    productFullDescName: {
-        padding: 5,
-        color: Colors.FG_tertiary,
-        fontSize: Sizes.text * 0.95
-    },
+    // ---------- components
+
     productFullRating: {
         flexDirection: 'row',
-        padding: 5
+        padding: Sizes.padding / 2,
     },
     productFullRatingIcon: {
         height: Sizes.text * 0.8,
         width: Sizes.text * 0.8,
         marginRight: Sizes.text * 0.2
     },
+    productFullPrice: {
+        flexDirection: 'row',
+        padding: Sizes.padding / 2,
+    },
+
+    // ---------- text components
+
+    productSplitBrandName: {
+        marginTop: Sizes.padding / 2, marginBottom: Sizes.padding / 2,
+
+        color: Colors.FG_tertiary,
+        textAlign: 'center',
+        fontWeight: 'bold'
+    },
+    productFullDescName: {
+        padding: Sizes.padding / 2,
+        color: Colors.FG_tertiary,
+        fontSize: Sizes.text * 0.95
+    },
     productFullRatingText: {
         color: Colors.FG_tertiary,
         fontSize: Sizes.text * 0.8,
         fontWeight: 'bold'
-    },
-    productFullPrice: {
-        flexDirection: 'row',
-        padding: 5
     },
     productFullPriceText: {
         ...productPriceText,
