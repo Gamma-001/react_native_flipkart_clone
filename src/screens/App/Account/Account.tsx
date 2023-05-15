@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { View, Text, Pressable, ScrollView, Alert } from 'react-native';
 import { FButtonBGHighlight } from '../../../components/FButton/Fbutton';
 import { SvgOrders, SvgWishlist, SvgGift, SvgHeadset } from '../../../assets/icons/svg';
-import { useLogoutMutation } from '../../../features/services/api';
+import { useLogoutMutation, useFetchFavoriteQuery } from '../../../features/services/api';
 
 import { NAVIGATOR } from '../../../shared/constants';
 import { LanguageContext } from '../../../contexts';
 import { NavigationProp } from '@react-navigation/native';
-import { resetCredentials } from '../../../features/credentials/credentialsSlice';
-import { RootState } from '../../../store';
+import { resetCredentials, resetSession } from '../../../features/credentials/credentialsSlice';
+import { resetUserData, setInitialized, setFavorites } from '../../../features/userData/userDataSlice';
+import { RootState, AppDispatch } from '../../../store';
 
 import styles from './Account.style';
 import commonStyles from '../../../themes/commons';
@@ -20,23 +21,52 @@ type AccountScreenProps = {
 }
 export default function AccountScreen({ navigation }: AccountScreenProps):JSX.Element {
     const LANG = useContext(LanguageContext);
-    const dispatch = useDispatch();
-    const credentials = useSelector((state: RootState) => state.credentials);
-    const [logout, logoutStatus] = useLogoutMutation();
+    const dispatch = useDispatch<AppDispatch>();
 
+    const credentials = useSelector((state: RootState) => state.credentials);
+
+    const userData = useSelector((state: RootState) => state.userData);
+    const [logout, logoutStatus] = useLogoutMutation();
+    const favorites = useFetchFavoriteQuery({
+        phone: credentials.phone,
+        token: credentials.sessionID
+    }, 
+    {
+        skip: userData.initialized || !credentials.sessionID 
+        // if data has previously been set, skip all fetches
+    });
+
+    // load favorites, cart and user data
+    useEffect(() => {
+        if (favorites.isSuccess) {
+            dispatch(setFavorites(favorites.data));
+            dispatch(setInitialized());
+        }
+    }, [favorites.isSuccess]);
+
+    // handle logout
     useEffect(() => {
         if (logoutStatus.isError) Alert.alert(LANG.ERROR.server);
 
         // logout regardless of success or failure
         if (logoutStatus.isSuccess || logoutStatus.isError) {
             dispatch(resetCredentials());
+            dispatch(resetSession());
+            logoutStatus.reset();
+        }
+    }, [logoutStatus]);
+
+    // reset states once the session has been cleared
+    useEffect(() => {
+        if (credentials.storageStatus == 'fulfilled' || credentials.storageStatus == 'rejected') {
+            dispatch(resetUserData());
             navigation.reset({
                 index: 0,
                 routes: [{ name: NAVIGATOR.AUTH }]
             });
-            logoutStatus.reset();
+            dispatch(resetCredentials());
         }
-    }, [logoutStatus]);
+    }, [credentials.storageStatus]);
 
     return (
         <View style = {{ flex: 1, backgroundColor: Colors.BG_secondary }}>

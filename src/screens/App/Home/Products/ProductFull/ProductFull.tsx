@@ -6,6 +6,7 @@ import {
     Dimensions 
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
+import Favorite from '../Favorite/Favorite';
 import { SvgHalfStar, SvgFullStar } from '../../../../../assets/icons/svg';
 
 import styles from './ProductFull.style';
@@ -24,7 +25,7 @@ export default function ProductFull({ data }: any): JSX.Element {
     return (
         <View style = { styles.productFullContainer }>
             <FastImage
-                style = {{ height: imageWidth * (dims.width ? (dims.height / dims.width) : 0), width: imageWidth }} 
+                style = {{ height: imageWidth * (dims.width ? (dims.height / dims.width) : 0), width: imageWidth, zIndex: 2 }} 
                 source = {{
                     uri: `${config.baseAddress}images/${data.imageURL[0]}`,
                     priority: FastImage.priority.normal
@@ -76,6 +77,9 @@ export default function ProductFull({ data }: any): JSX.Element {
                             <Text style = { styles.productFullPriceText }>{ formatCurrency(parseInt(data.price.base)) }</Text>
                         )
                     }
+                </View>
+                <View style = { styles.favIcon } >
+                    <Favorite productID = { data._id }/>
                 </View>
             </View>
         </View>

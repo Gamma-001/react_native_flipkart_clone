@@ -10,13 +10,6 @@ const productPriceText = {
 const styles = StyleSheet.create({
     // ---------- containers
 
-    productFullContainer: {
-        flexDirection: 'row',
-        backgroundColor: Colors.BG_tertiary,
-        padding: Sizes.padding,
-        borderBottomColor: Colors.SHADOW_PRIMARY,
-        borderBottomWidth: 2
-    },
     productSplitContainer: {
         backgroundColor: Colors.BG_tertiary,
         padding: Sizes.padding,
@@ -27,22 +20,22 @@ const styles = StyleSheet.create({
 
     // ---------- components
 
-    productFullRating: {
+    productSplitRating: {
         flexDirection: 'row',
         padding: Sizes.padding / 2,
     },
-    productFullRatingIcon: {
+    productSplitRatingIcon: {
         height: Sizes.text * 0.8,
         width: Sizes.text * 0.8,
         marginRight: Sizes.text * 0.2
     },
-    productFullPrice: {
+    productSplitPrice: {
         flexDirection: 'row',
         padding: Sizes.padding / 2,
     },
     favIcon: {
         position: 'absolute',
-        right: 0, bottom: 0,
+        top: Sizes.text, left: Sizes.text,
         height: Sizes.text * 2,
         width: Sizes.text * 2,
         zIndex: 3
@@ -57,26 +50,26 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: 'bold'
     },
-    productFullDescName: {
+    productSplitDescName: {
         padding: Sizes.padding / 2,
         color: Colors.FG_tertiary,
         fontSize: Sizes.text * 0.95
     },
-    productFullRatingText: {
+    productSplitRatingText: {
         color: Colors.FG_tertiary,
         fontSize: Sizes.text * 0.8,
         fontWeight: 'bold'
     },
-    productFullPriceText: {
+    productSplitPriceText: {
         ...productPriceText,
         color: Colors.FG_tertiary
     },
-    productFullBasePriceText: {
+    productSplitBasePriceText: {
         ...productPriceText,
         color: Colors.HIGHLIGHT_SECONDARY,
         textDecorationLine: 'line-through',
     },
-    productFullDiscountText: {
+    productSplitDiscountText: {
         ...productPriceText,
         color: Colors.HIGHLIGHT_PRIMARY
     }

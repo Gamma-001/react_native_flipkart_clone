@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, memo } from 'react';
 import { View } from 'react-native';
 import HomeNavigator from '../HomeNavigator/HomeNavigator';
 import ShopsScreen from '../../screens/App/Shops/Shops';
@@ -74,45 +74,45 @@ type IconProps = {
     focused: boolean,
     size: number
 }
-function HomeIcon(props: IconProps): JSX.Element {
+const HomeIcon = memo((props: IconProps): JSX.Element => {
     return (
         <View style = { TabIconStyle(props) }>
             <SVGIcons.SvgHome fill = { props.color } />
         </View>
     )
-}
+});
 
-function ShopsIcon(props: IconProps): JSX.Element {
+const ShopsIcon = memo((props: IconProps): JSX.Element => {
     return (
         <View style = { TabIconStyle(props) }>
             <SVGIcons.SvgShops fill = { props.color }/>
         </View>
     )
-}
+});
 
-function NotificationsIcon(props: IconProps): JSX.Element {
+const NotificationsIcon = memo((props: IconProps): JSX.Element => {
     return (
         <View style = { TabIconStyle(props) }>
             <SVGIcons.SvgNotifications fill = { props.color }/>
         </View>
     )
-}
+});
 
-function AccountIcon(props: IconProps): JSX.Element {
+const AccountIcon = memo((props: IconProps): JSX.Element => {
     return (
         <View style = { TabIconStyle(props) }>
             <SVGIcons.SvgAccount fill = { props.color }/>
         </View>
     )
-}
+});
 
-function CartIcon(props: IconProps): JSX.Element {
+const CartIcon = memo((props: IconProps): JSX.Element => {
     return (
         <View style = { TabIconStyle(props) }>
             <SVGIcons.SvgCart fill = { props.color }/>
         </View>
     )
-}
+});
 
 function TabIconStyle(props: any) {
     return { height: props.size, width: props.size, padding: 2 }

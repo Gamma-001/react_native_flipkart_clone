@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.BG_tertiary,
         marginRight: Sizes.padding / 2,
         borderWidth: 1,
-        borderColor: Colors.COLOR_BORDER_TERTIARY,
+        borderColor: Colors.BORDER_TERTIARY,
         borderRadius: Sizes.text + Sizes.padding * 0.8 * 2, // the padding should be identical to enclosing text
     },
     productsFilterIcon: {

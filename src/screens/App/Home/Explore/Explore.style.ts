@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.BG_tertiary,
         padding: 15,
         borderBottomWidth: 2,
-        borderBottomColor: Colors.COLOR_SHADOW,
+        borderBottomColor: Colors.SHADOW_PRIMARY,
     },
     searchOuter: {
         flexDirection: 'row',
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         height: Sizes.text * 3 * 0.9,
         padding: 3, paddingLeft: 7, paddingRight: 7,
         borderWidth: 1,
-        borderColor: Colors.COLOR_BORDER_TERTIARY,
+        borderColor: Colors.BORDER_TERTIARY,
         borderRadius: Sizes.borderRadius
     },
     categoryContainer: {
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.BG_tertiary,
         marginTop: 10,
         padding: 10,
-        borderBottomColor: Colors.COLOR_SHADOW,
+        borderBottomColor: Colors.SHADOW_PRIMARY,
         borderBottomWidth: 2,
     },
 

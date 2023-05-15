@@ -6,9 +6,10 @@ import {
     Dimensions 
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
+import Favorite from '../Favorite/Favorite';
 import { SvgHalfStar, SvgFullStar } from '../../../../../assets/icons/svg';
 
-import styles from '../ProductFull/ProductFull.style';
+import styles from './ProductSplit.style';
 import { Colors } from '../../../../../themes/constants';
 
 import { config } from '../../../../../config';
@@ -23,6 +24,9 @@ export default function ProductSplit({ data }: any): JSX.Element {
 
     return (
         <View style = { styles.productSplitContainer }>
+            <View style = { styles.favIcon } >
+                <Favorite productID = { data._id }/>
+            </View>
             <FastImage
                 style = {{ height: imageWidth * (dims.width ? (dims.height / dims.width) : 0), width: imageWidth }} 
                 source = {{
@@ -36,47 +40,47 @@ export default function ProductSplit({ data }: any): JSX.Element {
                 <Text style = {[ styles.productSplitBrandName, { width: windowWidth - imageWidth } ]} numberOfLines = { 2 }>{
                     data.brand
                 }</Text>
-                <Text style = {[ styles.productFullDescName, { width: windowWidth - imageWidth } ]} numberOfLines = { 2 }>{ 
+                <Text style = {[ styles.productSplitDescName, { width: windowWidth - imageWidth } ]} numberOfLines = { 2 }>{ 
                     data.name 
                 }</Text>
-                <View style = { styles.productFullRating }>
+                <View style = { styles.productSplitRating }>
                     {
                         Array(5).fill(0).map((x, index) => {
                             if (parseFloat(data.rating) - index >= 1) {
                                 return ( 
-                                    <View key = { index } style = { styles.productFullRatingIcon }>
+                                    <View key = { index } style = { styles.productSplitRatingIcon }>
                                         <SvgFullStar fill = { Colors.HIGHLIGHT_PRIMARY }/>
                                     </View>
                                 )
                             }
                             else if (parseFloat(data.rating) - index >= 0.5) {
                                 return ( 
-                                    <View key = { index } style = { styles.productFullRatingIcon }>
+                                    <View key = { index } style = { styles.productSplitRatingIcon }>
                                         <SvgHalfStar fill = { Colors.HIGHLIGHT_PRIMARY } fill2 = { Colors.HIGHLIGHT_SECONDARY }/>
                                     </View>
                                 )
                             }
                             return ( 
-                                <View key = { index } style = { styles.productFullRatingIcon }>
+                                <View key = { index } style = { styles.productSplitRatingIcon }>
                                     <SvgFullStar fill = { Colors.HIGHLIGHT_SECONDARY }/>
                                 </View>
                             )
                         })
                     }
-                    <Text style = { styles.productFullRatingText }>{ data.rating.toPrecision(2) }</Text>
+                    <Text style = { styles.productSplitRatingText }>{ data.rating.toPrecision(2) }</Text>
                 </View>
-                <View style = { styles.productFullPrice }>
+                <View style = { styles.productSplitPrice }>
                     {
                         data.price.base != data.price.discount ? (
                             <>
-                                <Text style = { styles.productFullDiscountText }>{ 
+                                <Text style = { styles.productSplitDiscountText }>{ 
                                     Math.round(100 * (1 - parseInt(data.price.discount) / data.price.base))
                                 }%</Text>
-                                <Text style = { styles.productFullBasePriceText }>{ formatCurrency(parseInt(data.price.base)) }</Text>
-                                <Text style = { styles.productFullPriceText }>{ formatCurrency(parseInt(data.price.discount)) }</Text>
+                                <Text style = { styles.productSplitBasePriceText }>{ formatCurrency(parseInt(data.price.base)) }</Text>
+                                <Text style = { styles.productSplitPriceText }>{ formatCurrency(parseInt(data.price.discount)) }</Text>
                             </>
                         ) : (
-                            <Text style = { styles.productFullPriceText }>{ formatCurrency(parseInt(data.price.base)) }</Text>
+                            <Text style = { styles.productSplitPriceText }>{ formatCurrency(parseInt(data.price.base)) }</Text>
                         )
                     }
                 </View>

@@ -18,11 +18,11 @@ const styles = StyleSheet.create({
     },
     SelectionModalTitle: {
         backgroundColor: Colors.BG_tertiary,
-        borderBottomColor: Colors.COLOR_BORDER_TERTIARY,
+        borderBottomColor: Colors.BORDER_TERTIARY,
         borderBottomWidth: 1,
     },
     SelectionModalTitleText: {
-        color: Colors.COLOR_BORDER_TERTIARY,
+        color: Colors.BORDER_TERTIARY,
         fontSize: Sizes.text * 0.9,
         padding: Sizes.padding,
         paddingTop: Sizes.padding * 1.25, paddingBottom: Sizes.padding * 1.25

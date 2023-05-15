@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.BG_tertiary,
         height: Sizes.text * 3 + 2,
         borderBottomWidth: 2,
-        borderBottomColor: Colors.COLOR_SHADOW
+        borderBottomColor: Colors.SHADOW_PRIMARY
     },
 
     // ---------- components

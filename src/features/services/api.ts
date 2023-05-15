@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import base64 from 'base-64';
 import { config } from '../../config';
 
-interface fetchProductArgs {
+interface FetchProductArgs {
     tags: string[],
     offset?: number,
     limit?: number,
@@ -9,11 +10,20 @@ interface fetchProductArgs {
     sortOrder?: string[]
 };
 
+interface CredentialArgs {
+    phone: string,
+    token: string
+}
+
+const createAuth = (phone: string, token: string) => `Basic ${base64.encode(`${phone}:${token}`)}`;
+
 export const flipkartApi = createApi({
     reducerPath: 'flipkartApi',
     baseQuery: fetchBaseQuery({ baseUrl: config.baseAddress }),
     endpoints: (builder) => ({
-        // mutations
+        // ---------- mutations
+
+        // auth
         login: builder.mutation({
             query: (arg: { phone?: string, email?: string }) => ({
                 url: 'auth/login',
@@ -36,9 +46,35 @@ export const flipkartApi = createApi({
             })
         }),
 
-        // queries
+        // favorites
+        addFavorite: builder.mutation({
+            query: (arg: CredentialArgs & { productID: string }) => ({
+                url: 'user/add/favorite',
+                method: 'POST',
+                headers: {
+                    'Authorization': createAuth(arg.phone, arg.token),
+                },
+                body: {
+                    productID: arg.productID
+                }
+            })
+        }),
+        removeFavorite: builder.mutation({
+            query: (arg: CredentialArgs & { productID: string }) => ({
+                url : 'user/remove/favorite',
+                method: 'POST',
+                headers: {
+                    'Authorization': createAuth(arg.phone, arg.token)
+                },
+                body: {
+                    productID: arg.productID
+                }
+            })
+        }),
+
+        // ---------- queries
         fetchProducts: builder.query({
-            query: (arg: fetchProductArgs) => {
+            query: (arg: FetchProductArgs) => {
                 if (!arg.limit && !arg.offset && !arg.sort) return `products?tags=${arg.tags.join('+')}`;
                 else {
                     let url = `products?tags=${arg.tags.join('+')}&offset=${arg.offset || 0}&limit=${arg.limit || 10}`;
@@ -48,11 +84,22 @@ export const flipkartApi = createApi({
                     return url;
                 }
             }
-        })
+        }),
+        fetchFavorite: builder.query({
+            query: (arg: CredentialArgs) => ({
+                url: 'user/favorites',
+                method: 'GET',
+                headers: {
+                    'Authorization': createAuth(arg.phone, arg.token)
+                }
+            }),
+        }),
     })
 });
 
 export const { 
-    useLoginMutation, useSignupMutation, useLogoutMutation,
-    useFetchProductsQuery
+    useLoginMutation, useSignupMutation, useLogoutMutation, 
+    useAddFavoriteMutation, useRemoveFavoriteMutation,
+    
+    useFetchProductsQuery, useFetchFavoriteQuery
 } = flipkartApi;

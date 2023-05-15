@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     sectionContainer: {
         backgroundColor: Colors.BG_tertiary, 
         padding: 20,
-        borderBottomColor: Colors.COLOR_SHADOW,
+        borderBottomColor: Colors.SHADOW_PRIMARY,
         borderBottomWidth: 2,
         marginBottom: 10
     },
@@ -50,14 +50,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         paddingBottom: 10,
         borderBottomWidth: 1,
-        borderBottomColor: Colors.COLOR_SHADOW,
+        borderBottomColor: Colors.SHADOW_PRIMARY,
     },
     headerItem: {
         flex: 0.5,
         flexDirection: 'row',
         padding: 10,
         borderWidth: 1,
-        borderColor: Colors.COLOR_BORDER_TERTIARY,
+        borderColor: Colors.BORDER_TERTIARY,
         borderRadius: 5
     },
     headerItemText: {
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.BG_tertiary,
         padding: 7,
         borderWidth: 1,
-        borderColor: Colors.COLOR_BORDER_TERTIARY,
+        borderColor: Colors.BORDER_TERTIARY,
         alignItems: 'center'
     },
     btnLogoutText: {
