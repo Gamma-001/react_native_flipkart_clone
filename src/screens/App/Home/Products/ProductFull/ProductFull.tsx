@@ -10,6 +10,7 @@ import Favorite from '../Favorite/Favorite';
 import { SvgHalfStar, SvgFullStar } from '../../../../../assets/icons/svg';
 
 import styles from './ProductFull.style';
+import productStyles from '../../../../../themes/Commons/Products';
 import { Colors } from '../../../../../themes/constants';
 
 import { config } from '../../../../../config';
@@ -34,47 +35,47 @@ export default function ProductFull({ data }: any): JSX.Element {
                 resizeMode = 'contain'
             />
             <View>
-                <Text style = {[ styles.productFullDescName, { width: windowWidth - imageWidth } ]} numberOfLines = { 2 }>{ 
+                <Text style = {[ productStyles.productDescName, { width: windowWidth - imageWidth } ]} numberOfLines = { 2 }>{ 
                     data.name 
                 }</Text>
-                <View style = { styles.productFullRating }>
+                <View style = { productStyles.productRating }>
                     {
                         Array(5).fill(0).map((x, index) => {
                             if (parseFloat(data.rating) - index >= 1) {
                                 return ( 
-                                    <View key = { index } style = { styles.productFullRatingIcon }>
+                                    <View key = { index } style = { productStyles.productRatingIcon }>
                                         <SvgFullStar fill = { Colors.HIGHLIGHT_PRIMARY }/>
                                     </View>
                                 )
                             }
                             else if (parseFloat(data.rating) - index >= 0.5) {
                                 return ( 
-                                    <View key = { index } style = { styles.productFullRatingIcon }>
+                                    <View key = { index } style = { productStyles.productRatingIcon }>
                                         <SvgHalfStar fill = { Colors.HIGHLIGHT_PRIMARY } fill2 = { Colors.HIGHLIGHT_SECONDARY }/>
                                     </View>
                                 )
                             }
                             return ( 
-                                <View key = { index } style = { styles.productFullRatingIcon }>
+                                <View key = { index } style = { productStyles.productRatingIcon }>
                                     <SvgFullStar fill = { Colors.HIGHLIGHT_SECONDARY }/>
                                 </View>
                             )
                         })
                     }
-                    <Text style = { styles.productFullRatingText }>{ data.rating.toPrecision(2) }</Text>
+                    <Text style = { productStyles.productRatingText }>{ data.rating.toPrecision(2) }</Text>
                 </View>
-                <View style = { styles.productFullPrice }>
+                <View style = { productStyles.productPrice }>
                     {
                         data.price.base != data.price.discount ? (
                             <>
-                                <Text style = { styles.productFullDiscountText }>{ 
+                                <Text style = { productStyles.productDiscountText }>{ 
                                     Math.round(100 * (1 - parseInt(data.price.discount) / data.price.base))
                                 }%</Text>
-                                <Text style = { styles.productFullBasePriceText }>{ formatCurrency(parseInt(data.price.base)) }</Text>
-                                <Text style = { styles.productFullPriceText }>{ formatCurrency(parseInt(data.price.discount)) }</Text>
+                                <Text style = { productStyles.productBasePriceText }>{ formatCurrency(parseInt(data.price.base)) }</Text>
+                                <Text style = { productStyles.productPriceText }>{ formatCurrency(parseInt(data.price.discount)) }</Text>
                             </>
                         ) : (
-                            <Text style = { styles.productFullPriceText }>{ formatCurrency(parseInt(data.price.base)) }</Text>
+                            <Text style = { productStyles.productPriceText }>{ formatCurrency(parseInt(data.price.base)) }</Text>
                         )
                     }
                 </View>

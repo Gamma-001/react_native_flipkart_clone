@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from './constants';
+import { Colors } from '../constants';
 
 const commonStyles = StyleSheet.create({
     primaryText: { color: Colors.FG_primary },

@@ -1,6 +1,12 @@
 const LANG_EN_US = {
     ACCOUNT: 'Account',
+    ADD_TO_CART: 'Add to Cart',
     CART: 'Cart',
+    CART_ACK: {
+        ADD: 'Item added to cart',
+        REMOVE: 'Remove Item from cart',
+    },
+    FAV_ACK_DEL: 'Remove Item from wishlist',
     CATEGORIES: {
         'appliances': 'Appliances',
         'electronics': 'Electronics',
@@ -18,6 +24,7 @@ const LANG_EN_US = {
     ERROR: {
         server: 'Oops, something went wrong on our side'
     },
+    GO_TO_CART: 'Go to Cart',
     HELP_CENTER: 'Help Center',
     HOME: 'Home',
     JOIN: 'Join',
@@ -33,6 +40,8 @@ const LANG_EN_US = {
     NOTIFICATIONS: 'Notifications',
     ORDERS: 'Orders',
     PHONE_NUMBER: 'Phone Number',
+    REMOVE: 'Remove',
+    SAVE_FOR_LATER: 'Save for later',
     SEARCH_PLACEHOLDER: 'shirts for men',
     SEARCH_PRODUCTS: 'Search for products',
     SHOPS: 'Shops',

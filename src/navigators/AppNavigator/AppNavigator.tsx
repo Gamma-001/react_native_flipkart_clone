@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import HomeNavigator from '../HomeNavigator/HomeNavigator';
 import ShopsScreen from '../../screens/App/Shops/Shops';
 import NotificationsScreen from '../../screens/App/Notifications/Notifications';
-import AccountScreen from '../../screens/App/Account/Account';
+import AccountNavigator from '../AccountNavigator/AccountNavigator';
 import CartScreen from '../../screens/App/Cart/Cart';
 
 import { NAVIGATOR } from '../../shared/constants';
@@ -47,7 +47,7 @@ export default function AppNavigator():JSX.Element {
                     }}
                 />
                 <BottomTab.Screen
-                    name = { NAVIGATOR.ACCOUNT } component = { AccountScreen }
+                    name = { NAVIGATOR.ACCOUNT } component = { AccountNavigator }
                     options = {{
                         tabBarIcon: (props) => <AccountIcon {...props} />,
                         title: LANG.ACCOUNT,

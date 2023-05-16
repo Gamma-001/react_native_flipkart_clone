@@ -20,19 +20,6 @@ const styles = StyleSheet.create({
 
     // ---------- components
 
-    productSplitRating: {
-        flexDirection: 'row',
-        padding: Sizes.padding / 2,
-    },
-    productSplitRatingIcon: {
-        height: Sizes.text * 0.8,
-        width: Sizes.text * 0.8,
-        marginRight: Sizes.text * 0.2
-    },
-    productSplitPrice: {
-        flexDirection: 'row',
-        padding: Sizes.padding / 2,
-    },
     favIcon: {
         position: 'absolute',
         top: Sizes.text, left: Sizes.text,
@@ -49,29 +36,6 @@ const styles = StyleSheet.create({
         color: Colors.FG_tertiary,
         textAlign: 'center',
         fontWeight: 'bold'
-    },
-    productSplitDescName: {
-        padding: Sizes.padding / 2,
-        color: Colors.FG_tertiary,
-        fontSize: Sizes.text * 0.95
-    },
-    productSplitRatingText: {
-        color: Colors.FG_tertiary,
-        fontSize: Sizes.text * 0.8,
-        fontWeight: 'bold'
-    },
-    productSplitPriceText: {
-        ...productPriceText,
-        color: Colors.FG_tertiary
-    },
-    productSplitBasePriceText: {
-        ...productPriceText,
-        color: Colors.HIGHLIGHT_SECONDARY,
-        textDecorationLine: 'line-through',
-    },
-    productSplitDiscountText: {
-        ...productPriceText,
-        color: Colors.HIGHLIGHT_PRIMARY
     }
 });
 

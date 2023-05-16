@@ -48,31 +48,23 @@ export const flipkartApi = createApi({
 
         // favorites
         addFavorite: builder.mutation({
-            query: (arg: CredentialArgs & { productID: string }) => ({
-                url: 'user/add/favorite',
-                method: 'POST',
-                headers: {
-                    'Authorization': createAuth(arg.phone, arg.token),
-                },
-                body: {
-                    productID: arg.productID
-                }
-            })
+            query: (arg: CredentialArgs & { productID: string }) => addProduct('favorites', arg)
         }),
         removeFavorite: builder.mutation({
-            query: (arg: CredentialArgs & { productID: string }) => ({
-                url : 'user/remove/favorite',
-                method: 'POST',
-                headers: {
-                    'Authorization': createAuth(arg.phone, arg.token)
-                },
-                body: {
-                    productID: arg.productID
-                }
-            })
+            query: (arg: CredentialArgs & { productID: string }) => removeProduct('favorites', arg)
+        }),
+        // cart
+        addToCart: builder.mutation({
+            query: (arg: CredentialArgs & { productID: string }) => addProduct('cart', arg)
+        }),
+        removeFromCart: builder.mutation({
+            query: (arg: CredentialArgs & { productID: string }) => removeProduct('cart', arg)
         }),
 
         // ---------- queries
+        fetchProduct: builder.query({
+            query: (arg: { id: string }) => `products/${ arg.id }`
+        }),
         fetchProducts: builder.query({
             query: (arg: FetchProductArgs) => {
                 if (!arg.limit && !arg.offset && !arg.sort) return `products?tags=${arg.tags.join('+')}`;
@@ -86,13 +78,13 @@ export const flipkartApi = createApi({
             }
         }),
         fetchFavorite: builder.query({
-            query: (arg: CredentialArgs) => ({
-                url: 'user/favorites',
-                method: 'GET',
-                headers: {
-                    'Authorization': createAuth(arg.phone, arg.token)
-                }
-            }),
+            query: (arg: CredentialArgs) => fetchUserData('favorites', arg)
+        }),
+        fetchCart: builder.query({
+            query: (arg: CredentialArgs) => fetchUserData('cart', arg)
+        }),
+        fetchOrders: builder.query({
+            query: (arg: CredentialArgs) => fetchUserData('orders', arg)
         }),
     })
 });
@@ -100,6 +92,44 @@ export const flipkartApi = createApi({
 export const { 
     useLoginMutation, useSignupMutation, useLogoutMutation, 
     useAddFavoriteMutation, useRemoveFavoriteMutation,
-    
-    useFetchProductsQuery, useFetchFavoriteQuery
+    useAddToCartMutation, useRemoveFromCartMutation,
+
+    useFetchProductQuery, useFetchProductsQuery, 
+    useFetchFavoriteQuery, useFetchCartQuery, useFetchOrdersQuery
 } = flipkartApi;
+
+type UserDataField = 'favorites' | 'cart' | 'orders';
+
+// helper functions 
+
+// ---------- user data
+
+const fetchUserData = (field: UserDataField, arg: CredentialArgs) => ({
+    url: `user/${field}`,
+    method: 'GET',
+    headers: {
+        'Authorization': createAuth(arg.phone, arg.token)
+    }
+});
+
+const addProduct = (field: UserDataField, arg: CredentialArgs & { productID: string }) => ({
+    url: `user/add/${field}`,
+    method: 'POST',
+    headers: {
+        'Authorization': createAuth(arg.phone, arg.token),
+    },
+    body: {
+        productID: arg.productID
+    }
+});
+
+const removeProduct = (field: UserDataField, arg: CredentialArgs & { productID: string }) => ({
+    url: `user/remove/${field}`,
+    method: 'POST',
+    headers: {
+        'Authorization': createAuth(arg.phone, arg.token),
+    },
+    body: {
+        productID: arg.productID
+    }
+});

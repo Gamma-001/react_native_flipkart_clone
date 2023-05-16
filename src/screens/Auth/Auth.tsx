@@ -9,7 +9,7 @@ import { setCredentials } from '../../features/credentials/credentialsSlice';
 
 import { NAVIGATOR } from '../../shared/constants'; 
 import styles from './Auth.style';
-import commonStyles from '../../themes/commons';
+import commonStyles from '../../themes/Commons/commons';
 
 import { CommonActions, NavigationProp } from '@react-navigation/native';
 

@@ -57,7 +57,7 @@ export default function ProductsScreen({ navigation, route }: BasicScreenProps):
         <View style = { styles.productsContainer }>
             <SearchBar navigation = { navigation }/>
             <View style = { styles.productsFilterContainer }>
-            <ScrollView horizontal = { true }>
+            <ScrollView horizontal = { true } showsHorizontalScrollIndicator = { false } >
                 {/* sort */}
                 <Pressable style = { styles.productsFilter } onPress = {() => {
                     setShowModals({ ...showModals, sort: true });
