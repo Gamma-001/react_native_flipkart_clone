@@ -59,7 +59,7 @@ export default function AppNavigator():JSX.Element {
                     options = {{
                         tabBarIcon: (props) => <CartIcon {...props} />,
                         title: LANG.CART,
-                        tabBarItemStyle: { marginBottom: 5 }
+                        tabBarItemStyle: { marginBottom: 5 },
                     }}
                 />
             </BottomTab.Navigator>

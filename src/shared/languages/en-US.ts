@@ -6,7 +6,12 @@ const LANG_EN_US = {
         ADD: 'Item added to cart',
         REMOVE: 'Remove Item from cart',
     },
+    DELIVERY_CHARGES: 'Delivery Charges',
+    DISCOUNT: 'Discount',
     FAV_ACK_DEL: 'Remove Item from wishlist',
+    ITEM: {
+        SINGULAR: 'Item', PLURAL: 'Items'
+    },
     CATEGORIES: {
         'appliances': 'Appliances',
         'electronics': 'Electronics',
@@ -24,6 +29,7 @@ const LANG_EN_US = {
     ERROR: {
         server: 'Oops, something went wrong on our side'
     },
+    FREE_DELIVERY: 'FREE Delivery',
     GO_TO_CART: 'Go to Cart',
     HELP_CENTER: 'Help Center',
     HOME: 'Home',
@@ -40,8 +46,11 @@ const LANG_EN_US = {
     NOTIFICATIONS: 'Notifications',
     ORDERS: 'Orders',
     PHONE_NUMBER: 'Phone Number',
+    PRICE: 'Price',
+    PRICE_DETAILS: 'Price Details',
     REMOVE: 'Remove',
     SAVE_FOR_LATER: 'Save for later',
+    SAVE_AMOUNT: (amount: any) => `You will save ${amount} on this order`,
     SEARCH_PLACEHOLDER: 'shirts for men',
     SEARCH_PRODUCTS: 'Search for products',
     SHOPS: 'Shops',
@@ -58,6 +67,7 @@ const LANG_EN_US = {
         'and',
         'Privacy Policy',
     ],
+    TOTAL_AMOUNT: 'Total Amount',
     USE_PHONE: 'Use Phone Number',
     USE_EMAIl: 'Use Email-ID',
     WISHLIST: 'Wishlist',

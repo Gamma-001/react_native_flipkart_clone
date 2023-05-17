@@ -1,4 +1,5 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { View, Text, Dimensions } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import ItemFooter from '../ItemFooter/ItemFooter';
@@ -12,19 +13,33 @@ import styles from './CartItem.style';
 import productStyles from '../../../../themes/Commons/Products';
 import { Colors } from '../../../../themes/constants';
 
-export default function CartItem({ id }: { id: string }): JSX.Element {
+import { RootState } from '../../../../store';
+
+interface CartItemProps {
+    id: string,
+    setPrice: (arg: any) => void
+};
+export default function CartItem({ id, setPrice }: CartItemProps): JSX.Element {
     const windowWidth = Dimensions.get('window').width - (styles.productContainer.padding || 0) * 4;
     const imageWidth = windowWidth / 3;
     const [dims, setDims] = useState({
         height: 0, width: 0
     });
     
+    const cart = useSelector((state: RootState) => state.userData.cart);
     const [data, setData] = useState<any>(undefined);
     const product = useFetchProductQuery({ id });
 
     useEffect(() => {
-        product.isSuccess && setData(product.data);
-    }, [product.isSuccess]);
+        if  (product.isSuccess || product.data) {
+            setData(product.data),
+            setPrice((x: any) => ({
+                ...x, 
+                base: x.base + product.data.price.base,
+                discount: x.discount + product.data.price.base - product.data.price.discount
+            }));
+        }
+    }, [product.isSuccess, cart]);
 
     return (
         <>
@@ -88,7 +103,7 @@ export default function CartItem({ id }: { id: string }): JSX.Element {
                         </View>
                     </View>
                 </View>
-                <ItemFooter />
+                <ItemFooter productID = { id }/>
             </>
             )
         }
